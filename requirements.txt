@@ -1,0 +1,6 @@
+# In Colab
+transformers 
+torch 
+streamlit 
+firebase-admin 
+google-auth

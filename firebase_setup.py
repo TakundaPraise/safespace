@@ -16,9 +16,13 @@ def register_user(email, password):
 
 # Save harassment reports
 def save_report(user_id, text, label, confidence):
+        # Convert confidence to a native Python float
+    confidence = float(confidence)
     db.collection("reports").add({
         "user_id": user_id,
         "text": text,
         "label": label,
         "confidence": confidence
     })
+
+

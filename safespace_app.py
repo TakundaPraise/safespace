@@ -1,5 +1,3 @@
-# safespace_app.py
-
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
@@ -31,7 +29,7 @@ def classify_text(text):
 st.title("SafeSpace - Online Harassment Detector for Women and Girls")
 st.subheader("Empowering Safer Online Spaces with AI")
 
-st.write("""
+st.write(""" 
 SafeSpace is a tool designed to help identify and address online harassment targeting women and girls. 
 Using advanced AI, SafeSpace analyzes text to determine whether it contains harmful or abusive content. 
 This empowers users to navigate online interactions with increased confidence and safety.
@@ -39,7 +37,7 @@ This empowers users to navigate online interactions with increased confidence an
 
 # How to use the tool
 st.markdown("### How to Use SafeSpace")
-st.write("""
+st.write(""" 
 1. Enter a message in the **Message** field below.
 2. Click the **Detect** button to check if the message contains harassment.
 3. View the results to see if the message is classified as "Safe" or "Harassment" along with the confidence score.
@@ -48,7 +46,7 @@ st.write("""
 
 # Sample text suggestions
 st.markdown("#### Sample Messages to Try")
-st.write("""
+st.write(""" 
 - "You are so inspiring. Keep up the great work!"
 - "Everyone thinks you're terrible. Just leave already."
 - "Thank you for your help on the project."
@@ -63,7 +61,7 @@ user_input = st.text_area("Enter a message you want to check:", "")
 if st.button("Detect"):
     if user_input:
         # Show progress bar while processing
-        with st.spinner("Analyzing..."):
+        with st.spinner("Analyzing... 🧐"):
             progress = st.progress(0)
             for percent_complete in range(100):
                 time.sleep(0.01)
@@ -86,14 +84,17 @@ if st.button("Detect"):
         # Save report to Firebase
         save_report(user_id, user_input, label, confidence)
 
-        # Provide safety tips if harassment is detected
+        # Show buttons or stickers based on the result
         if label == "Harassment":
+            st.button("🚫 Harassment Detected", key="harassment", help="This message contains harassment!", style="danger")
             tips = [
                 "Consider blocking or reporting the user if the harassment persists.",
                 "Seek support from a trusted friend or family member.",
                 "Practice online safety and protect your personal information."
             ]
             st.warning("**Safety Tip:** " + random.choice(tips))
+        else:
+            st.button("✅ Message is Safe", key="safe", help="This message is safe.", style="success")
+
     else:
         st.error("Please enter some text to analyze.")
-

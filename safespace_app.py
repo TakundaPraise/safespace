@@ -24,8 +24,6 @@ def classify_text(text):
     return label, confidence
 
 # Streamlit app UI
-
-# Title and brief overview
 st.title("SafeSpace - Online Harassment Detector for Women and Girls")
 st.subheader("Empowering Safer Online Spaces with AI")
 
@@ -63,39 +61,28 @@ if st.button("Detect"):
         # Show spinner while processing
         with st.spinner("Analyzing... 🧐"):
             time.sleep(2)  # Mimic processing delay
+        
         # Run classification
         label, confidence = classify_text(user_input)
 
-        # Display result
-        st.markdown("### Results")
-        st.write(f"**Classification:** {label}")
-        st.write(f"**Confidence Level:** {confidence:.2f}")
-
-        # Convert confidence to native float before saving to Firebase
-        confidence = float(confidence)
-
-        # Mock user authentication (in production, connect with Firebase Auth)
-        user_id = "zMRSBNz5AygIReNXxfVxwJkaEA32"
-
-        # Save report to Firebase
-        save_report(user_id, user_input, label, confidence)
-
-        # Show custom buttons or stickers based on the result
+        # Display result as button
         if label == "Harassment":
             st.markdown("""
                 <style>
-                    .harassment-btn {
+                    .result-btn-harassment {
                         background-color: red;
                         color: white;
                         padding: 10px 20px;
                         border-radius: 5px;
                         text-align: center;
                         font-size: 18px;
-                        cursor: pointer;
+                        font-weight: bold;
+                        cursor: not-allowed;
+                        border: none;
                     }
                 </style>
-                <button class="harassment-btn" disabled>🚫 Harassment Detected</button>
-            """, unsafe_allow_html=True)
+                <button class="result-btn-harassment" disabled>🚫 Harassment Detected - Confidence: {:.2f}</button>
+            """.format(confidence), unsafe_allow_html=True)
             
             tips = [
                 "Consider blocking or reporting the user if the harassment persists.",
@@ -106,18 +93,24 @@ if st.button("Detect"):
         else:
             st.markdown("""
                 <style>
-                    .safe-btn {
+                    .result-btn-safe {
                         background-color: green;
                         color: white;
                         padding: 10px 20px;
                         border-radius: 5px;
                         text-align: center;
                         font-size: 18px;
-                        cursor: pointer;
+                        font-weight: bold;
+                        cursor: not-allowed;
+                        border: none;
                     }
                 </style>
-                <button class="safe-btn" disabled>✅ Message is Safe</button>
-            """, unsafe_allow_html=True)
+                <button class="result-btn-safe" disabled>✅ Message is Safe - Confidence: {:.2f}</button>
+            """.format(confidence), unsafe_allow_html=True)
+
+        # Save report to Firebase
+        user_id = "zMRSBNz5AygIReNXxfVxwJkaEA32"
+        save_report(user_id, user_input, label, float(confidence))
 
     else:
         st.error("Please enter some text to analyze.")

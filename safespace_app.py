@@ -65,23 +65,35 @@ if st.button("Detect"):
         # Run classification
         label, confidence = classify_text(user_input)
 
-        # Display result as button
+        # Display result
+        st.markdown("### Results")
+        st.write(f"**Classification:** {label}")
+        st.write(f"**Confidence Level:** {confidence:.2f}")
+
+        # Convert confidence to native float before saving to Firebase
+        confidence = float(confidence)
+
+        # Mock user authentication (in production, connect with Firebase Auth)
+        user_id = "zMRSBNz5AygIReNXxfVxwJkaEA32"
+
+        # Save report to Firebase
+        save_report(user_id, user_input, label, confidence)
+
+        # Show custom buttons based on the result
         if label == "Harassment":
-            st.markdown(f"""
+            st.markdown("""
                 <style>
-                    .result-btn-harassment {{
+                    .harassment-btn {
                         background-color: red;
                         color: white;
                         padding: 10px 20px;
                         border-radius: 5px;
                         text-align: center;
                         font-size: 18px;
-                        font-weight: bold;
-                        cursor: not-allowed;
-                        border: none;
-                    }}
+                        cursor: pointer;
+                    }
                 </style>
-                <button class="result-btn-harassment" disabled>🚫 Harassment Detected - Confidence: {confidence:.2f}</button>
+                <button class="harassment-btn" disabled>🚫 Harassment Detected</button>
             """, unsafe_allow_html=True)
             
             tips = [
@@ -91,22 +103,20 @@ if st.button("Detect"):
             ]
             st.warning("**Safety Tip:** " + random.choice(tips))
         else:
-            st.markdown(f"""
+            st.markdown("""
                 <style>
-                    .result-btn-safe {{
+                    .safe-btn {
                         background-color: green;
                         color: white;
                         padding: 10px 20px;
                         border-radius: 5px;
                         text-align: center;
                         font-size: 18px;
-                        font-weight: bold;
-                        cursor: not-allowed;
-                        border: none;
-                    }}
+                        cursor: pointer;
+                    }
                 </style>
-                <button class="result-btn-safe" disabled>✅ Message is Safe - Confidence: {confidence:.2f}</button>
+                <button class="safe-btn" disabled>✅ Message is Safe</button>
             """, unsafe_allow_html=True)
 
-        # Save report to Firebase
-        user_id = "zMRSBNz5AygIReNXxfVxwJkaEA"
+    else:
+        st.error("Please enter some text to analyze.")

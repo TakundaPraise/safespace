@@ -37,7 +37,7 @@ if st.button("Detect"):
         st.write(f"**Confidence:** {confidence:.2f}")
 
         # Mock user authentication (in production, connect with Firebase Auth)
-        user_id = "example_user_id"
+        user_id = "zMRSBNz5AygIReNXxfVxwJkaEA32"
 
         # Save report to Firebase
         save_report(user_id, user_input, label, confidence)

@@ -84,9 +84,23 @@ if st.button("Detect"):
         # Save report to Firebase
         save_report(user_id, user_input, label, confidence)
 
-        # Show buttons or stickers based on the result
+        # Show custom buttons or stickers based on the result
         if label == "Harassment":
-            st.button("🚫 Harassment Detected", key="harassment", help="This message contains harassment!", style="danger")
+            st.markdown("""
+                <style>
+                    .harassment-btn {
+                        background-color: red;
+                        color: white;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        text-align: center;
+                        font-size: 18px;
+                        cursor: pointer;
+                    }
+                </style>
+                <button class="harassment-btn" disabled>🚫 Harassment Detected</button>
+            """, unsafe_allow_html=True)
+            
             tips = [
                 "Consider blocking or reporting the user if the harassment persists.",
                 "Seek support from a trusted friend or family member.",
@@ -94,7 +108,20 @@ if st.button("Detect"):
             ]
             st.warning("**Safety Tip:** " + random.choice(tips))
         else:
-            st.button("✅ Message is Safe", key="safe", help="This message is safe.", style="success")
+            st.markdown("""
+                <style>
+                    .safe-btn {
+                        background-color: green;
+                        color: white;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        text-align: center;
+                        font-size: 18px;
+                        cursor: pointer;
+                    }
+                </style>
+                <button class="safe-btn" disabled>✅ Message is Safe</button>
+            """, unsafe_allow_html=True)
 
     else:
         st.error("Please enter some text to analyze.")

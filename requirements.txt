@@ -4,3 +4,5 @@ torch
 streamlit 
 firebase-admin 
 google-auth
+google-cloud-firestore
+firebase-admin

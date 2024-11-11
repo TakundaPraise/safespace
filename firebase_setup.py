@@ -6,6 +6,19 @@ from google.cloud import firestore
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
 
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Retrieve the environment variable (e.g., GOOGLE_APPLICATION_CREDENTIALS)
+google_credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+
+# Now you can use google_credentials_path or any other secrets in your app
+print(f"Credentials Path: {google_credentials_path}")
+
+
 # Initialize Firebase app
 cred = credentials.Certificate("config/firebase-adminsdk.json")  # Add your Firebase credentials
 firebase_admin.initialize_app(cred)

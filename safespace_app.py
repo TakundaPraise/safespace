@@ -67,9 +67,9 @@ if st.button("Detect"):
 
         # Display result as button
         if label == "Harassment":
-            st.markdown("""
+            st.markdown(f"""
                 <style>
-                    .result-btn-harassment {
+                    .result-btn-harassment {{
                         background-color: red;
                         color: white;
                         padding: 10px 20px;
@@ -79,10 +79,10 @@ if st.button("Detect"):
                         font-weight: bold;
                         cursor: not-allowed;
                         border: none;
-                    }
+                    }}
                 </style>
-                <button class="result-btn-harassment" disabled>🚫 Harassment Detected - Confidence: {:.2f}</button>
-            """.format(confidence), unsafe_allow_html=True)
+                <button class="result-btn-harassment" disabled>🚫 Harassment Detected - Confidence: {confidence:.2f}</button>
+            """, unsafe_allow_html=True)
             
             tips = [
                 "Consider blocking or reporting the user if the harassment persists.",
@@ -91,9 +91,9 @@ if st.button("Detect"):
             ]
             st.warning("**Safety Tip:** " + random.choice(tips))
         else:
-            st.markdown("""
+            st.markdown(f"""
                 <style>
-                    .result-btn-safe {
+                    .result-btn-safe {{
                         background-color: green;
                         color: white;
                         padding: 10px 20px;
@@ -103,14 +103,10 @@ if st.button("Detect"):
                         font-weight: bold;
                         cursor: not-allowed;
                         border: none;
-                    }
+                    }}
                 </style>
-                <button class="result-btn-safe" disabled>✅ Message is Safe - Confidence: {:.2f}</button>
-            """.format(confidence), unsafe_allow_html=True)
+                <button class="result-btn-safe" disabled>✅ Message is Safe - Confidence: {confidence:.2f}</button>
+            """, unsafe_allow_html=True)
 
         # Save report to Firebase
-        user_id = "zMRSBNz5AygIReNXxfVxwJkaEA32"
-        save_report(user_id, user_input, label, float(confidence))
-
-    else:
-        st.error("Please enter some text to analyze.")
+        user_id = "zMRSBNz5AygIReNXxfVxwJkaEA

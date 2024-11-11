@@ -5,6 +5,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from firebase_setup import save_report
 import random
+import time
 
 # Load model and tokenizer
 @st.cache_resource
@@ -25,16 +26,56 @@ def classify_text(text):
     return label, confidence
 
 # Streamlit app UI
-st.title("SafeSpace - Online Harassment Detector for Women and Girls")
-st.write("Check if a message contains harmful or abusive content.")
 
-# User input
-user_input = st.text_area("Message", "")
+# Title and brief overview
+st.title("SafeSpace - Online Harassment Detector for Women and Girls")
+st.subheader("Empowering Safer Online Spaces with AI")
+
+st.write("""
+SafeSpace is a tool designed to help identify and address online harassment targeting women and girls. 
+Using advanced AI, SafeSpace analyzes text to determine whether it contains harmful or abusive content. 
+This empowers users to navigate online interactions with increased confidence and safety.
+""")
+
+# How to use the tool
+st.markdown("### How to Use SafeSpace")
+st.write("""
+1. Enter a message in the **Message** field below.
+2. Click the **Detect** button to check if the message contains harassment.
+3. View the results to see if the message is classified as "Safe" or "Harassment" along with the confidence score.
+4. If harassment is detected, SafeSpace will provide safety tips to help you respond.
+""")
+
+# Sample text suggestions
+st.markdown("#### Sample Messages to Try")
+st.write("""
+- "You are so inspiring. Keep up the great work!"
+- "Everyone thinks you're terrible. Just leave already."
+- "Thank you for your help on the project."
+- "You don't deserve to be here."
+""")
+
+# User input section
+st.markdown("### Analyze a Message")
+user_input = st.text_area("Enter a message you want to check:", "")
+
+# Detect button and output display
 if st.button("Detect"):
     if user_input:
+        # Show progress bar while processing
+        with st.spinner("Analyzing..."):
+            progress = st.progress(0)
+            for percent_complete in range(100):
+                time.sleep(0.01)
+                progress.progress(percent_complete + 1)
+        
+        # Run classification
         label, confidence = classify_text(user_input)
-        st.write(f"**Result:** {label}")
-        st.write(f"**Confidence:** {confidence:.2f}")
+
+        # Display result
+        st.markdown("### Results")
+        st.write(f"**Classification:** {label}")
+        st.write(f"**Confidence Level:** {confidence:.2f}")
 
         # Mock user authentication (in production, connect with Firebase Auth)
         user_id = "zMRSBNz5AygIReNXxfVxwJkaEA32"
@@ -42,13 +83,14 @@ if st.button("Detect"):
         # Save report to Firebase
         save_report(user_id, user_input, label, confidence)
 
-        # Provide helpful tips based on the classification result
+        # Provide safety tips if harassment is detected
         if label == "Harassment":
             tips = [
                 "Consider blocking or reporting the user if the harassment persists.",
                 "Seek support from a trusted friend or family member.",
                 "Practice online safety and protect your personal information."
             ]
-            st.write("**Safety Tip:** " + random.choice(tips))
+            st.warning("**Safety Tip:** " + random.choice(tips))
     else:
-        st.write("Please enter some text to analyze.")
+        st.error("Please enter some text to analyze.")
+

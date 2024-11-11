@@ -1,4 +1,7 @@
 # firebase_setup.py (Run this once to initialize Firebase in your project)
+import google
+from google.api_core.exceptions import GoogleAPIError
+from google.cloud import firestore
 
 import firebase_admin
 from firebase_admin import credentials, firestore, auth

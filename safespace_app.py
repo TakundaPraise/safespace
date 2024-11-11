@@ -109,4 +109,4 @@ if st.button("Detect"):
             """, unsafe_allow_html=True)
 
         # Save report to Firebase
-        user_id = "zMRSBNz5AygIReNXxfVxwJkaEA
+        user_id = "zMRSBNz5AygIReNXxfVxwJkaEA"

@@ -32,17 +32,23 @@ def register_user(email, password):
         return None
 
 # Save harassment reports
+from google.cloud import firestore
+
+# Firestore database instance
+db = firestore.client()
+
+# Save harassment reports
 def save_report(user_id, user_input, label, confidence):
     try:
-        report_data = {
+        # Add a new document to the "reports" collection with the specified fields
+        db.collection("reports").add({
             "user_id": user_id,
             "input": user_input,
             "label": label,
             "confidence": confidence,
-            "timestamp": firestore.SERVER_TIMESTAMP  # Optional: adds a timestamp to the report
-        }
-        # Add the document to Firestore
-        db.collection("reports").add(report_data)
-        print("Report successfully saved.")
-    except GoogleAPIError as e:
+            "timestamp": firestore.SERVER_TIMESTAMP  # Automatically set the current timestamp
+        })
+        print("Report saved to Firestore.")
+    except Exception as e:
         print(f"Error saving report to Firestore: {e}")
+

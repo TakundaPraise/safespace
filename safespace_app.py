@@ -77,6 +77,9 @@ if st.button("Detect"):
         st.write(f"**Classification:** {label}")
         st.write(f"**Confidence Level:** {confidence:.2f}")
 
+        # Convert confidence to native float before saving to Firebase
+        confidence = float(confidence)
+
         # Mock user authentication (in production, connect with Firebase Auth)
         user_id = "zMRSBNz5AygIReNXxfVxwJkaEA32"
 

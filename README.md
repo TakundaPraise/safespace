@@ -38,15 +38,21 @@ streamlit run app.py
  ```
 or you can alternatively click this link to view my app https://safespace-nt4batnikeylrrpkrxpfpf.streamlit.app/
 
-Usage
+## Usage
+
+
 Enter a message in the text input field or select a sample message.
 Click "Detect" to check if the message contains harassment.
 Results will show whether the message is "Harassment" or "Safe," along with the confidence level.
 If harassment is detected, safety tips will be provided.
 
-Firebase Integration
+## Integration
+
+
 The app saves each report to Firebase under the reports collection for analysis.
 
-Troubleshooting
+## Troubleshooting
+
+
 Ensure Firebase credentials are set correctly in the .env file.
 Run pip install -r requirements.txt if dependencies are missing.

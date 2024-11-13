@@ -8,7 +8,9 @@ from google.api_core.exceptions import GoogleAPIError
 load_dotenv()
 
 # Retrieve the environment variable
+GOOGLE_APPLICATION_CREDENTIALS="config/firebase-adminsdk.json"
 google_credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+
 
 # Print the credentials path for verification (remove or comment this in production)
 print(f"Credentials Path: {google_credentials_path}")

@@ -32,7 +32,8 @@ st.subheader("Empowering Safer Online Spaces with AI")
 # Introduction to SafeSpace tool
 st.write("""
 SafeSpace is a tool designed to help identify and address online harassment targeting women and girls. 
-Using advanced AI, SafeSpace analyzes text to determine whether it contains harmful or abusive content.
+Using advanced AI, SafeSpace analyzes text to determine whether it contains harmful or abusive content. 
+This empowers users to navigate online interactions with increased confidence and safety.
 """)
 
 # How to use SafeSpace tool

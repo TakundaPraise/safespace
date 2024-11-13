@@ -4,8 +4,29 @@ import torch
 from firebase_setup import save_report
 import random
 import time
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, MarianMTModel, MarianTokenizer
-from langdetect import detect
+
+import os
+from dotenv import load_dotenv
+import firebase_admin
+from firebase_admin import credentials, firestore, auth
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Retrieve the environment variable
+google_credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+
+if not google_credentials_path:
+    raise ValueError("Environment variable for Google credentials not set.")
+
+# Initialize Firebase app if not already initialized
+if not firebase_admin._apps:
+    cred = credentials.Certificate(google_credentials_path)
+    firebase_admin.initialize_app(cred)
+
+# Initialize Firestore
+db = firestore.client()
+
 
 # Load model and tokenizer
 @st.cache_resource

@@ -7,3 +7,4 @@ google-auth
 google-cloud-firestore
 firebase-admin
 python-dotenv
+langdetect

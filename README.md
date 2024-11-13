@@ -2,36 +2,38 @@ SafeSpace is an AI tool developed to help women and girls recognize and respond 
 
 Testing Instructions for SafeSpace Application
 
+# SafeSpace - Online Harassment Detector for Women and Girls
 
-Installation
-Clone the repository:
+## Overview
+SafeSpace is an AI-powered tool designed to help women and girls identify online harassment. It uses the **cardiffnlp/twitter-roberta-base-offensive** model to classify messages as either **Harassment** or **Safe**. The tool integrates with **Firebase** to securely store reports and provide users with safety tips.
 
-bash
-git clone https://github.com/your-username/safespace.git
-cd safespace
-Install dependencies:
+## Installation
 
-bash
-pip install -r requirements.txt
-Set up Firebase:
+1. **Clone the repository**:
 
-Create a Firebase project and download the Firebase Admin SDK credentials as firebase-adminsdk.json.
-Add the Firebase credentials to your .env file:
-bash
-GOOGLE_APPLICATION_CREDENTIALS=path/to/your/firebase-adminsdk.json
-Running the Application
+    ```bash
+    git clone https://github.com/your-username/safespace.git
+    cd safespace
+    ```
+
+2. **Install dependencies**:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. **Set up Firebase**:
+    - Create a Firebase project and download the Firebase Admin SDK credentials as `firebase-adminsdk.json`.
+    - Add the Firebase credentials to your `.env` file:
+    
+    ```bash
+    GOOGLE_APPLICATION_CREDENTIALS=path/to/your/firebase-adminsdk.json
+    ```
+
+## Running the Application
+
 Start the app with Streamlit:
 
-bash
+```bash
 streamlit run app.py
-Usage
-Enter a message in the text input field or select a sample message.
-Click "Detect" to check if the message contains harassment.
-Results will show whether the message is "Harassment" or "Safe," along with the confidence level.
-If harassment is detected, safety tips will be provided.
-Firebase Integration
-The app saves each report to Firebase under the reports collection for analysis.
-Troubleshooting
-Ensure Firebase credentials are set correctly in the .env file.
-Run pip install -r requirements.txt if dependencies are missing.
 

@@ -36,4 +36,5 @@ Start the app with Streamlit:
 
 ```bash
 streamlit run app.py
-
+ ```
+or you can alternatively click this link to view my app https://safespace-nt4batnikeylrrpkrxpfpf.streamlit.app/

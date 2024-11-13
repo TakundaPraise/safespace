@@ -39,7 +39,7 @@ def register_user(email, password):
 from google.cloud import firestore
 
 # Firestore database instance
-db = firestore.client()
+db = firestore.Client()
 
 # Save harassment reports
 def save_report(user_id, user_input, label, confidence):

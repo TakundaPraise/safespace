@@ -6,6 +6,8 @@ from google.api_core.exceptions import GoogleAPIError
 
 # Load environment variables from .env file
 load_dotenv()
+import os
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "config/firebase-adminsdk.json"
 
 # Retrieve the environment variable
 GOOGLE_APPLICATION_CREDENTIALS="config/firebase-adminsdk.json"

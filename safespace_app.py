@@ -46,13 +46,13 @@ with st.expander("How to Use SafeSpace", expanded=True):
     """)
 
 # Sample messages for testing in a dropdown menu
-sample_messages = [
-    "You are so inspiring. Keep up the great work!",
-    "Everyone thinks you're terrible. Just leave already.",
-    "Thank you for your help on the project.",
-    "You don't deserve to be here."
-]
-selected_sample = st.selectbox("Sample Messages to Try", options=sample_messages)
+with st.expander("Sample Messages to Try", expanded=True):
+    st.write("""
+- "You are so inspiring. Keep up the great work!"
+- "Everyone thinks you're terrible. Just leave already."
+- "Thank you for your help on the project."
+- "You don't deserve to be here."
+    """)
 
 
 # User input

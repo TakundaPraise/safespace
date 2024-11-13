@@ -4,6 +4,8 @@ import torch
 from firebase_setup import save_report
 import random
 import time
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, MarianMTModel, MarianTokenizer
+from langdetect import detect
 
 # Load model and tokenizer
 @st.cache_resource

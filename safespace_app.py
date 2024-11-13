@@ -36,23 +36,24 @@ Using advanced AI, SafeSpace analyzes text to determine whether it contains harm
 This empowers users to navigate online interactions with increased confidence and safety.
 """)
 
-# How to use SafeSpace tool
-st.markdown("### How to Use SafeSpace")
-st.write("""
-1. Enter a message in the **Message** field below.
-2. Click the **Detect** button to check if the message contains harassment.
-3. View the results to see if the message is classified as "Safe" or "Harassment" along with the confidence score.
-4. If harassment is detected, SafeSpace will provide safety tips to help you respond.
-""")
+# How to Use SafeSpace tool with dropdowns
+with st.expander("How to Use SafeSpace", expanded=True):
+    st.write("""
+    1. Enter a message in the **Message** field below.
+    2. Click the **Detect** button to check if the message contains harassment.
+    3. View the results to see if the message is classified as "Safe" or "Harassment" along with the confidence score.
+    4. If harassment is detected, SafeSpace will provide safety tips to help you respond.
+    """)
 
-# Sample messages for testing
-st.markdown("#### Sample Messages to Try")
-st.write("""
-- "You are so inspiring. Keep up the great work!"
-- "Everyone thinks you're terrible. Just leave already."
-- "Thank you for your help on the project."
-- "You don't deserve to be here."
-""")
+# Sample messages for testing in a dropdown menu
+sample_messages = [
+    "You are so inspiring. Keep up the great work!",
+    "Everyone thinks you're terrible. Just leave already.",
+    "Thank you for your help on the project.",
+    "You don't deserve to be here."
+]
+selected_sample = st.selectbox("Sample Messages to Try", options=sample_messages)
+
 
 # User input
 user_input = st.text_area("Enter a message you want to check:", "")

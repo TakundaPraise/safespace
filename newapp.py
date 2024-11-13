@@ -6,6 +6,8 @@ from firebase_setup import save_report
 import random
 import time
 
+
+
 # Define supported African languages in Southern Africa with respective translation models
 southern_african_language_models = {
     "sw": "Helsinki-NLP/opus-mt-sw-en",  # Swahili to English
@@ -111,3 +113,7 @@ if st.button("Detect"):
                 """, unsafe_allow_html=True)
     else:
         st.error("Please enter some text to analyze.")
+
+
+
+
